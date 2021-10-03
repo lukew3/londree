@@ -1,0 +1,41 @@
+Thoughts:
+If users don't have to put in their machine number, how do you keep track of which machines users are using (this feels like a stupid question)
+Should users be able to get in line, and get notified when a machine is opened, one-at-a-time
+How do you indicate if a machine is out of order?
+
+
+If mongodb:
+-----------
+Collection of laundromats
+
+Laundromat
+* _id - ObjectId
+* name - string
+* washers - object
+  #Don't necessarily need available/completed/in-use fields, but they would make it more efficient
+  * available - int
+  * completed - int
+  * in-use - int
+  * machines - array
+    * completion-time - datetime
+* dryers - object
+  * available - int
+  * completed - int
+  * in-use - int
+  * machines - array
+    * completion-time - datetime
+
+
+If SQL:
+-------
+Laundromat table
+* id - int
+* name - String
+
+Machine table
+* id - int
+* Machine type - String, int, could be boolean if only washers and dryers
+* completion-time - datetime
+* reference to laundromat
+* laundromat machine number/id (the number shown on the physical machine) - string or int, not sure if some laundromats use letters on their machines
+* status - String or int #again, might not be necessary

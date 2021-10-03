@@ -10,17 +10,22 @@ status = {
     2 : "Ready"
 }
 
-@app.route("/")
-@app.route("/home")
-def home():
-    return render_template('home.html')
 
 
-@app.route("/laundry")
-def laundry():
-    return render_template('laundry.html')
+@app.route("/dorm<dorm_id>")
+def laundromat(dorm_id):
+    dorm = Laundromat.query.filter_by(id=dorm_id).first()
+    washers = dorm.droshers.filter_by(is_washer=True).all()
+    dryers = dorm.droshers.filter_by(is_washer=False).all()
+    return render_template('laundromat.html', dorm=dorm, washers=washers, dryers=dryers)
 
 
+# @app.route("/dorm<dorm_id>/unit<drosher_id>/load/new")
+# def create_load(dorm_id, drosher_id):
+#     form = CreateLoadForm(drosher_id)
+#     return render_template('create_load.html', title='Next Load', form=form)
+
+"""
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -76,17 +81,4 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     return render_template('account.html', title='Account', form=form)
-
-
-@app.route("/dorm<dorm_id>")
-def laundromat(dorm_id):
-    dorm = Laundromat.query.filter_by(id=dorm_id).first()
-    washers = dorm.droshers.filter_by(is_washer=True).all()
-    dryers = dorm.droshers.filter_by(is_washer=False).all()
-    return render_template('laundromat.html', dorm=dorm, washers=washers, dryers=dryers)
-
-
-# @app.route("/dorm<dorm_id>/unit<drosher_id>/load/new")
-# def create_load(dorm_id, drosher_id):
-#     form = CreateLoadForm(drosher_id)
-#     return render_template('create_load.html', title='Next Load', form=form)
+"""

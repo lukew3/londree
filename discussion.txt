@@ -1,0 +1,15 @@
+* I think that a react native app should be created instead of flask templates
+  * This way, we could deploy to mobile and web with one codebase
+
+* Remove users from the database, there is no reason for users to have an account
+  * Making users sign up before using means that they will be more likely to decide
+  not to use the service once they see that they have to sign up
+  * To keep track of users so that they don't spam, you could keep track of ip,
+  or give each device a unique code of sorts
+
+* Consider using a remote sql database
+  * I thought about mongo, and it seems that the schema would be easier in sql
+
+* Show figma designs
+
+* Show the react-native app
